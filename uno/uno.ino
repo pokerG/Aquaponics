@@ -26,7 +26,7 @@ void SerialPrint(){
 	ts.id = ID_STP0;
 	wts.id = ID_STP1;
 	tempSensor.requestTemperatures(); // Send the command to get temperatures
-  tempWSensor.requestTemperatures();
+  	tempWSensor.requestTemperatures();
 	int a0 = tempSensor.getTempCByIndex(0)*100;
 	int a1 = tempWSensor.getTempCByIndex(0)*100;
 	ts.hdat = a0 >> 8;
@@ -36,10 +36,12 @@ void SerialPrint(){
 	Serial.print(ts.id);
 	Serial.print(ts.hdat);
 	Serial.print(ts.ldat);
+	Serial.println();
 	Serial.print(wts.id);
 	Serial.print(wts.hdat);
 	Serial.print(wts.ldat);
+	Serial.println();
 }
-void SerialEvent(){
+void serialEvent(){
 	Serial.read();
 }

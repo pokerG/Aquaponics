@@ -3,10 +3,10 @@
 | -----	| -------------	| ---------------------	|
 | 0x01	| 步进电机	| 控制LED阵列红灯		|
 | 0x02	| 步进电机	| 控制LED阵列蓝灯		|
-| 0x03	| 继电器		| 控制滴定酸液蠕动泵	|
-| 0x04	| 继电器		| 控制滴定碱液蠕动泵	|
-| 0x05	| 继电器		| 控制日光灯		|
-| 0x06	| 步进电机	| 控制喂鱼器		|
+| 0x03	| 步进电机	| 控制喂鱼器		|
+| 0x04	| 继电器		| 控制滴定酸液蠕动泵	|
+| 0x05	| 继电器		| 控制滴定碱液蠕动泵	|
+| 0x06	| 继电器		| 控制日光灯		|
 | 0x07	| 继电器		| 控制补水泵		|
 | 0x08	| 继电器		| 控制抽水泵		|
 | 0x09	| 继电器		| 控制氧气泵		|
@@ -14,10 +14,10 @@
 */
 #define ID_LRED 0x1
 #define ID_LBLE 0x2
-#define ID_PACI 0x3
-#define ID_PALK 0x4
-#define ID_LFLU 0x5
-#define ID_FFSH 0x6
+#define ID_FFSH 0x3
+#define ID_PACI 0x4
+#define ID_PALK 0x5
+#define ID_LFLU 0x6
 #define ID_PSUP 0x7
 #define ID_PREC 0x8
 #define ID_POXY 0x9
