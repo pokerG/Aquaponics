@@ -21,7 +21,7 @@
 #define ID_PSUP 0x7
 #define ID_PREC 0x8
 #define ID_POXY 0x9
-#defein ID_PFLW 0xA
+#define ID_PFLW 0xA
 
 /*
 | 控制码	| 作用	|
