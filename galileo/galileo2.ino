@@ -45,29 +45,29 @@ void SerialPrint(){
 	ws2.hdat = a >> 8;
 	ws2.ldat = a & 0x00ff;
 
-	Serial.print(ls.id);
-	Serial.print(ls.hdat);
-	Serial.print(ls.ldat);
+	Serial.print(ls.id,HEX);
+	Serial.print(ls.hdat,HEX);
+	Serial.print(ls.ldat,HEX);
 	Serial.println();
 
-	Serial.print(ms.id);
-	Serial.print(ms.hdat);
-	Serial.print(ms.ldat);
+	Serial.print(ms.id,HEX);
+	Serial.print(ms.hdat,HEX);
+	Serial.print(ms.ldat,HEX);
 	Serial.println();
 
-	Serial.print(ws1.id);
-	Serial.print(ws1.hdat);
-	Serial.print(ws1.ldat);
+	Serial.print(ws1.id,HEX);
+	Serial.print(ws1.hdat,HEX);
+	Serial.print(ws1.ldat,HEX);
 	Serial.println();
 
-	Serial.print(phs.id);
-	Serial.print(phs.hdat);
-	Serial.print(phs.ldat);
+	Serial.print(phs.id,HEX);
+	Serial.print(phs.hdat,HEX);
+	Serial.print(phs.ldat,HEX);
 	Serial.println();
 
-	Serial.print(ws2.id);
-	Serial.print(ws2.hdat);
-	Serial.print(ws2.ldat);
+	Serial.print(ws2.id,HEX);
+	Serial.print(ws2.hdat,HEX);
+	Serial.print(ws2.ldat,HEX);
 	Serial.println();
 }
 

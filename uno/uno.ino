@@ -2,8 +2,8 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-#define ONE_WIRE_BUS 0
-#define TWO_WIRE_BUS 1
+#define ONE_WIRE_BUS 2
+#define TWO_WIRE_BUS 3
 // Setup Wire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 OneWire oneWire(ONE_WIRE_BUS);
 OneWire twoWire(TWO_WIRE_BUS);
@@ -34,13 +34,15 @@ void SerialPrint(){
 	wts.hdat= a1 >> 8;
 	wts.ldat = a1 & 0x00ff;
 	Serial.print(ts.id);
-	Serial.print(ts.hdat);
-	Serial.print(ts.ldat);
+	Serial.print(ts.hdat,HEX);
+	Serial.print(ts.ldat,HEX);
 	Serial.println();
-	Serial.print(wts.id);
-	Serial.print(wts.hdat);
-	Serial.print(wts.ldat);
-	Serial.println();
+
+	Serial.print(wts.id,HEX);
+	Serial.print(wts.hdat,HEX);
+	Serial.print(wts.ldat,HEX);
+    Serial.println();
+
 }
 void serialEvent(){
 	Serial.read();
