@@ -23,27 +23,27 @@ void loop(){
 void SerialPrint(){
   struct DAT ls,ms,ws1,phs,ws2;
   ls.id = ID_SRL0;
-  int a = analogRead(LightS)*100;
+  int a = analogRead(LightS)*10;
   ls.hdat = a >> 8;
   ls.ldat = a & 0x00ff;
 
   ms.id = ID_SHU0;
-  a = analogRead(MoisS)*100;
+  a = analogRead(MoisS)*10;
   ms.hdat = a >> 8;
   ms.ldat = a & 0x00ff;
 
   ws1.id = ID_SWL0;
-  a = analogRead(WaterS1)*100;
+  a = analogRead(WaterS1)*10;
   ws1.hdat = a >> 8;
   ws1.ldat = a & 0x00ff;
 
   phs.id = ID_SPH1;
-  a = analogRead(PhS)*100;
+  a = analogRead(PhS)*10;
   phs.hdat = a >> 8;
   phs.ldat = a & 0x00ff;
 
   ws2.id = ID_SWL1;
-  a = analogRead(WaterS2)*100;
+  a = analogRead(WaterS2)*10;
   ws2.hdat = a >> 8;
   ws2.ldat = a & 0x00ff;
 
@@ -88,10 +88,10 @@ void SerialRead(){
     case ID_POXY:
     case ID_PFLW:
       if (cd.ctr == ON){
-        digitalWrite(cd.id,HIGH);
+        digitalWrite(cd.id,LOW);
       }
       if (cd.ctr == OFF){
-        digitalWrite(cd.id,LOW);
+        digitalWrite(cd.id,HIGH);
       }
       break;
     case ID_LRED:
