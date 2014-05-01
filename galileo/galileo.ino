@@ -12,6 +12,7 @@ bool relay[relayNum];
 void setup(){
   Serial.begin(9600);
   for (int i = 0;i < relayNum;i++){
+  	relay[i] = false;
     pinMode(i + relayoffset,OUTPUT);
   }
 }
@@ -92,7 +93,7 @@ void SerialRead(){
       	relay[cd.id - relayoffset] = true;
       }
       if (cd.ctr == OFF){
-        relay[cd.id - relayoffset] = true;
+        relay[cd.id - relayoffset] = false;
       }
       break;
     case ID_LRED:
