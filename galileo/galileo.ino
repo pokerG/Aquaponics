@@ -1,10 +1,10 @@
 #include <comAPI.h>
 
-#define LightS 0	//Light Sensor pin
-#define	MoisS 1	//moisture sensor pin 
+#define LightS 0  //Light Sensor pin
+#define MoisS 1 //moisture sensor pin 
 #define WaterS1 2 //Water level sensor 1 pin 
 #define PhS 3
-#define WaterS2 4	//Water level sensor 2 pin
+#define WaterS2 4 //Water level sensor 2 pin
 #define relayNum 7 //the number of relay
 #define relayoffset 4 // offset from 0
 bool relay[relayNum];
@@ -12,7 +12,7 @@ bool relay[relayNum];
 void setup(){
   Serial.begin(9600);
   for (int i = 0;i < relayNum;i++){
-  	relay[i] = false;
+    relay[i] = false;
     pinMode(i + relayoffset,OUTPUT);
   }
 }
@@ -21,6 +21,7 @@ void loop(){
   SerialRead();
   relayPrint();
 }
+
 
 void SerialPrint(){
   struct DAT ls,ms,ws1,phs,ws2;
@@ -76,7 +77,9 @@ void SerialPrint(){
 }
 
 void SerialRead(){
-  if(Serial.available()){ 
+  if(Serial.available() == 2){ 
+
+
     struct CMD cd;
     cd.id = Serial.read(); 
     delay(2);
@@ -90,7 +93,7 @@ void SerialRead(){
     case ID_POXY:
     case ID_PFLW:
       if (cd.ctr == ON){
-      	relay[cd.id - relayoffset] = true;
+        relay[cd.id - relayoffset] = true;
       }
       if (cd.ctr == OFF){
         relay[cd.id - relayoffset] = false;
@@ -103,16 +106,45 @@ void SerialRead(){
       // default:
       //return err
     }
+    FILE *fp;
+    fp = fopen("/home/galileo", "w"); 
+    if(fp != NULL){
+      for (int i = 0; i < 7; i ++){
+        fputc(relay[i],fp);
+      }
+      fclose(fp);
+    }
+  }  
+  while(Serial.available() ){
+    Serial.read();
   }
 
 }
 
 void relayPrint(){
-	for(int i = 0; i < relayNum; i++){
-		if(relay[i]){
-			digitalWrite(i + relayoffset,LOW);
-		}else{
-			digitalWrite(i + relayoffset,HIGH);
-		}
-	}
+  FILE *fp;
+
+  fp = fopen("/home/galileo", "r"); 
+  int i = 0;
+  if(fp!= NULL){
+    while( feof(fp) == 0){
+      relay[i] = fgetc(fp);
+      i++;
+      if(i == 7){
+        break;
+      }
+    }
+    fclose(fp);
+  }
+  for( i = 0; i < relayNum; i++){
+    if(relay[i]){
+      digitalWrite(i + relayoffset,LOW);
+    }
+    else{
+      digitalWrite(i + relayoffset,HIGH);
+    }
+  }
 }
+
+
+
