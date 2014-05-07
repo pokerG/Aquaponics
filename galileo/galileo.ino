@@ -27,52 +27,47 @@ void SerialPrint(){
   struct DAT ls,ms,ws1,phs,ws2;
   ls.id = ID_SRL0;
   int a = analogRead(LightS)*10;
-  ls.hdat = a >> 8;
-  ls.ldat = a & 0x00ff;
+  ls.dat = a;
+
 
   ms.id = ID_SHU0;
   a = analogRead(MoisS)*10;
-  ms.hdat = a >> 8;
-  ms.ldat = a & 0x00ff;
+  ms.dat = a;
+
 
   ws1.id = ID_SWL0;
   a = analogRead(WaterS1)*10;
-  ws1.hdat = a >> 8;
-  ws1.ldat = a & 0x00ff;
+  ws1.dat = a;
+
 
   phs.id = ID_SPH1;
   a = analogRead(PhS)*10;
-  phs.hdat = a >> 8;
-  phs.ldat = a & 0x00ff;
+  phs.dat = a;
+
 
   ws2.id = ID_SWL1;
   a = analogRead(WaterS2)*10;
-  ws2.hdat = a >> 8;
-  ws2.ldat = a & 0x00ff;
+  ws2.dat = a;
 
-  Serial.print(ls.id,HEX);
-  Serial.print(ls.hdat,HEX);
-  Serial.print(ls.ldat,HEX);
+
+  Serial.print(ls.id,DEC);
+  Serial.print(ls.dat,DEC);
   Serial.print(" ");
 
-  Serial.print(ms.id,HEX);
-  Serial.print(ms.hdat,HEX);
-  Serial.print(ms.ldat,HEX);
+  Serial.print(ms.id,DEC);
+  Serial.print(ms.dat,DEC);
   Serial.print(" ");
 
-  Serial.print(ws1.id,HEX);
-  Serial.print(ws1.hdat,HEX);
-  Serial.print(ws1.ldat,HEX);
+  Serial.print(ws1.id,DEC);
+  Serial.print(ws1.dat,DEC);
   Serial.print(" ");
 
-  Serial.print(phs.id,HEX);
-  Serial.print(phs.hdat,HEX);
-  Serial.print(phs.ldat,HEX);
+  Serial.print(phs.id,DEC);
+  Serial.print(phs.dat,DEC);
   Serial.print(" ");
 
-  Serial.print(ws2.id,HEX);
-  Serial.print(ws2.hdat,HEX);
-  Serial.print(ws2.ldat,HEX);
+  Serial.print(ws2.id,DEC);
+  Serial.print(ws2.dat,DEC);
   Serial.println();
 }
 
@@ -86,10 +81,10 @@ void SerialRead(){
     cd.ctr = Serial.read();
     switch(cd.id){
     case 0x00:
-    	if(cd.ctr == 0x00){
-    		SerialPrint();
-    	}
-    	break;
+      if(cd.ctr == 0x00){
+        SerialPrint();
+      }
+      break;
     case ID_PACI:
     case ID_PALK:
     case ID_LFLU: 
@@ -150,6 +145,7 @@ void relayPrint(){
     }
   }
 }
+
 
 
 

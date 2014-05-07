@@ -57,24 +57,22 @@ void SerialPrint(){
   tempWSensor.requestTemperatures();
   int a0 = tempSensor.getTempCByIndex(0)*100;
   int a1 = tempWSensor.getTempCByIndex(0)*100;
-  ts.hdat = a0 >> 8;
-  ts.ldat = a0 & 0x00ff;
-  wts.hdat = a1 >> 8;
-  wts.ldat = a1 & 0x00ff;
-  Serial.print(ts.id);
-  Serial.print(ts.hdat,HEX);
-  Serial.print(ts.ldat,HEX);
+  ts.dat = a0;
+  wts.dat = a1;
+
+  Serial.print(ts.id,DEC);
+  Serial.print(ts.dat,DEC);
   Serial.print(" ");
 
-  Serial.print(wts.id,HEX);
-  Serial.print(wts.hdat,HEX);
-  Serial.print(wts.ldat,HEX);
+  Serial.print(wts.id,DEC);
+  Serial.print(wts.dat,DEC);
   Serial.println();
 
 }
 
 void serialEvent(){
-  struct CMD cd;
+	if(Serial.available()){
+		struct CMD cd;
   cd.id = Serial.read();
   delay(2);
   cd.ctr = Serial.read();
@@ -82,6 +80,10 @@ void serialEvent(){
   	SerialPrint();
   }else{
   	wise(cd);
+  }
+	}
+  while(Serial.available() ){
+    Serial.read();
   }
   
 }

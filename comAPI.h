@@ -72,6 +72,5 @@ struct CMD
 struct DAT
 {
 	unsigned char id;
-	unsigned char hdat;
-	unsigned char ldat;
+	unsigned int dat;
 };
