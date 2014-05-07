@@ -64,7 +64,7 @@ void SerialPrint(){
   Serial.print(ts.id);
   Serial.print(ts.hdat,HEX);
   Serial.print(ts.ldat,HEX);
-  Serial.println();
+  Serial.print(" ");
 
   Serial.print(wts.id,HEX);
   Serial.print(wts.hdat,HEX);

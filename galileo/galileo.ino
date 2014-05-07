@@ -53,22 +53,22 @@ void SerialPrint(){
   Serial.print(ls.id,HEX);
   Serial.print(ls.hdat,HEX);
   Serial.print(ls.ldat,HEX);
-  Serial.println();
+  Serial.print(" ");
 
   Serial.print(ms.id,HEX);
   Serial.print(ms.hdat,HEX);
   Serial.print(ms.ldat,HEX);
-  Serial.println();
+  Serial.print(" ");
 
   Serial.print(ws1.id,HEX);
   Serial.print(ws1.hdat,HEX);
   Serial.print(ws1.ldat,HEX);
-  Serial.println();
+  Serial.print(" ");
 
   Serial.print(phs.id,HEX);
   Serial.print(phs.hdat,HEX);
   Serial.print(phs.ldat,HEX);
-  Serial.println();
+  Serial.print(" ");
 
   Serial.print(ws2.id,HEX);
   Serial.print(ws2.hdat,HEX);
