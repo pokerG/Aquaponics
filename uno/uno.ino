@@ -46,7 +46,7 @@ void setup(){
 }
 
 void loop(){
-  SerialPrint();
+  // SerialPrint();
 }
 
 void SerialPrint(){
@@ -78,7 +78,12 @@ void serialEvent(){
   cd.id = Serial.read();
   delay(2);
   cd.ctr = Serial.read();
-  wise(cd);
+  if(cd.id == 0x00 && cd.ctr == 0x00){
+  	SerialPrint();
+  }else{
+  	wise(cd);
+  }
+  
 }
 
 

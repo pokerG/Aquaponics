@@ -17,7 +17,7 @@ void setup(){
   }
 }
 void loop(){
-  SerialPrint();
+  // SerialPrint();
   SerialRead();
   relayPrint();
 }
@@ -85,6 +85,11 @@ void SerialRead(){
     delay(2);
     cd.ctr = Serial.read();
     switch(cd.id){
+    case 0x00:
+    	if(cd.ctr == 0x00){
+    		SerialPrint();
+    	}
+    	break;
     case ID_PACI:
     case ID_PALK:
     case ID_LFLU: 
