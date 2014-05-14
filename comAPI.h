@@ -11,6 +11,7 @@
 | 0x08	| 继电器		| 控制抽水泵		|
 | 0x09	| 继电器		| 控制氧气泵		|
 | 0x0A	| 继电器		| 控制造浪泵		|
+| 0x0B	| 继电器		| 控制红外线		|
 */
 #define ID_LRED 0x1
 #define ID_LBLE 0x2
@@ -22,7 +23,7 @@
 #define ID_PREC 0x8
 #define ID_POXY 0x9
 #define ID_PFLW 0xA
-
+#define ID_LIFR 0xB
 /*
 | 控制码	| 作用	|
 | -----	| -----	|
@@ -72,5 +73,6 @@ struct CMD
 struct DAT
 {
 	unsigned char id;
-	unsigned int dat;
+	unsigned char hdat;
+	unsigned char ldat;
 };

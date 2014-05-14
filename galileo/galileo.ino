@@ -5,7 +5,7 @@
 #define WaterS1 2 //Water level sensor 1 pin 
 #define PhS 3
 #define WaterS2 4 //Water level sensor 2 pin
-#define relayNum 7 //the number of relay
+#define relayNum 8 //the number of relay
 #define relayoffset 4 // offset from 0
 bool relay[relayNum];
 
@@ -92,6 +92,7 @@ void SerialRead(){
     case ID_PREC:
     case ID_POXY:
     case ID_PFLW:
+    case ID_LIFR:
       if (cd.ctr == ON){
         relay[cd.id - relayoffset] = true;
       }
