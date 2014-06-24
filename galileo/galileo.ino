@@ -5,8 +5,8 @@
 #define WaterS1 2 //Water level sensor 1 pin 
 #define PhS 3
 #define WaterS2 4 //Water level sensor 2 pin
-#define relayNum 8 //the number of relay
-#define relayoffset 4 // offset from 0
+#define relayNum 9 //the number of relay
+#define relayoffset 3 // offset from 0
 bool relay[relayNum];
 
 void setup(){
@@ -80,11 +80,34 @@ void SerialRead(){
     delay(2);
     cd.ctr = Serial.read();
     switch(cd.id){
-    case 0x00:
+    case 0x00: //获取传感器信息
       if(cd.ctr == 0x00){
         SerialPrint();
       }
       break;
+    case 0x0C: //获取继电器状态
+      if(cd.ctr == 0x00){
+      	FILE *fp;
+      	int sd = 0; //继电器状态
+    	  fp = fopen("/home/galileo", "r");
+    	  int i = 0;
+ 		    if(fp!= NULL){
+    	   while( feof(fp) == 0){
+      		  sd = fgetc(fp);
+      		  sd = sd << 1;
+      		  i++;
+      		  if(i == 8){
+        	   	break;
+      		  }
+    	   }
+        }
+    	  fclose(fp);
+    	  Serial.print(0,DEC);
+    	  Serial.print(sd,DEC);
+      }
+      break;
+       //控制继电器
+    case ID_FFSH:
     case ID_PACI:
     case ID_PALK:
     case ID_LFLU: 
@@ -102,7 +125,6 @@ void SerialRead(){
       break;
     case ID_LRED:
     case ID_LBLE:
-    case ID_FFSH:
       break;
       // default:
       //return err
@@ -110,7 +132,7 @@ void SerialRead(){
     FILE *fp;
     fp = fopen("/home/galileo", "w"); 
     if(fp != NULL){
-      for (int i = 0; i < 7; i ++){
+      for (int i = 0; i < relayNum; i ++){
         fputc(relay[i],fp);
       }
       fclose(fp);
@@ -128,10 +150,10 @@ void relayPrint(){
   fp = fopen("/home/galileo", "r"); 
   int i = 0;
   if(fp!= NULL){
-    while( feof(fp) == 0){
+    while(feof(fp) == 0){
       relay[i] = fgetc(fp);
       i++;
-      if(i == 7){
+      if(i == relayNum){
         break;
       }
     }
