@@ -93,17 +93,17 @@ void SerialRead(){
     	  int i = 0;
  		    if(fp!= NULL){
     	   while( feof(fp) == 0){
-      		  sd = fgetc(fp);
-      		  sd = sd << 1;
+      		  sd = sd + fgetc(fp);
       		  i++;
-      		  if(i == 8){
+      		  if(i == relayNum){
         	   	break;
       		  }
+            sd = sd << 1;
     	   }
         }
     	  fclose(fp);
     	  Serial.print(0,DEC);
-    	  Serial.print(sd,DEC);
+    	  Serial.println(sd,DEC);
       }
       break;
        //控制继电器
