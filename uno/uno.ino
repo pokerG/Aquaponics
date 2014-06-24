@@ -21,7 +21,7 @@ struct stepper{
   int IN2;	// Pink   - 28BYJ48 pin 2
   int IN3;	// Yellow - 28BYJ48 pin 3
   int IN4;	// Orange - 28BYJ48 pin 4
-}sp[3];
+}sp[2];
 
 void setup(){
   Serial.begin(9600);
@@ -35,12 +35,8 @@ void setup(){
   sp[1].IN2 = 7;
   sp[1].IN3 = 8;
   sp[1].IN4 = 9;
-  sp[2].IN1 = 14;
-  sp[2].IN2 = 15;
-  sp[2].IN3 = 16;
-  sp[2].IN4 = 17;
   
-  for(int i = 6;i <= 17;i++){
+  for(int i = 6;i <= 13;i++){
     pinMode(i,OUTPUT);
   }
 }
@@ -78,7 +74,7 @@ void serialEvent(){
   cd.ctr = Serial.read();
   if(cd.id == 0x00 && cd.ctr == 0x00){
   	SerialPrint();
-  }else{
+  }else if(cd.id == ID_LRED || cd.id == ID_LBLE){
   	wise(cd);
   }
 	}
