@@ -7,6 +7,9 @@
 #define WaterS2 4 //Water level sensor 2 pin
 #define relayNum 9 //the number of relay
 #define relayoffset 3 // offset from 0
+
+#define Offset 0.00            //deviation compensate
+
 bool relay[relayNum];
 
 void setup(){
@@ -41,7 +44,7 @@ void SerialPrint(){
 
 
   phs.id = ID_SPH1;
-  a = analogRead(PhS)*10;
+  a = (analogRead(PhS) * 5.0 * 3.5 / 1024) * 100;
   phs.dat = a;
 
 
@@ -68,24 +71,23 @@ void SerialPrint(){
 
   Serial.print(ws2.id,DEC);
   Serial.print(ws2.dat,DEC);
+  Serial.print(" ");
 
-  
   Serial.print(0x08,DEC);
-  FILE *fp;
-  int sd = 0; //继电器状态
-  fp = fopen("/home/galileo", "r");
-  int i = 0;
-  if(fp!= NULL){
-     while( feof(fp) == 0){
-        Serial.print(fgetc(fp),DEC);
-        i++;
-        if(i == relayNum){
-          break;
+      	FILE *fp;
+      	 //继电器状态
+    	  fp = fopen("/home/galileo", "r");
+    	  int i = 0;
+ 		    if(fp!= NULL){
+    	   while( feof(fp) == 0){
+      		  Serial.print(fgetc(fp),DEC);
+      		  i++;
+      		  if(i == relayNum){
+        	   	break;
+      		  }
+    	   }
         }
-        sd = sd << 1;
-     }
-  }
-  fclose(fp);
+    	  fclose(fp);
   Serial.println();
 }
 
