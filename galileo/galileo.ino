@@ -68,6 +68,7 @@ void SerialPrint(){
 
   Serial.print(ws2.id,DEC);
   Serial.print(ws2.dat,DEC);
+<<<<<<< HEAD
   
   Serial.print(0x08,DEC);
   FILE *fp;
@@ -85,6 +86,25 @@ void SerialPrint(){
      }
   }
   fclose(fp);
+=======
+  Serial.print(" ");
+
+  Serial.print(0x08,DEC);
+      	FILE *fp;
+      	 //继电器状态
+    	  fp = fopen("/home/galileo", "r");
+    	  int i = 0;
+ 		    if(fp!= NULL){
+    	   while( feof(fp) == 0){
+      		  Serial.print(fgetc(fp),DEC);
+      		  i++;
+      		  if(i == relayNum){
+        	   	break;
+      		  }
+    	   }
+        }
+    	  fclose(fp);
+>>>>>>> b175a0bc06392e1ab8eeb32320f991d0cc0f3865
   Serial.println();
 }
 
@@ -102,7 +122,11 @@ void SerialRead(){
         SerialPrint();
       }
       break;
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> b175a0bc06392e1ab8eeb32320f991d0cc0f3865
        //控制继电器
     case ID_FFSH:
     case ID_PACI:
